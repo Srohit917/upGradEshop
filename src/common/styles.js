@@ -55,7 +55,7 @@ export const productFormTheme = createTheme({
   },
 });
 
-export const navigationStyles = makeStyles((theme) => ({
+export const navigationStyles = makeStyles(() => ({
   appBarBoxStyle: { flexGrow: 1 },
   toolBarStyle: { gap: "16px" },
   searchFieldStyle: {
@@ -80,5 +80,23 @@ export const navigationStyles = makeStyles((theme) => ({
       },
     },
   },
-  searchIconStyle: { color: "white" }
+  searchIconStyle: { color: "white" },
+}));
+
+export const loginStyles = makeStyles(() => ({
+  lockIconStyle: {
+    borderRadius: "50%",
+    backgroundColor: "#F33A6A",
+    padding: "12px",
+    color: "white",
+  },
+  textFieldStyle: {
+    width: "100%",
+  },
+  footerStyle: {
+    color: "lightslategrey",
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+  },
 }));
