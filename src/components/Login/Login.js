@@ -8,7 +8,7 @@ import "./Login.css";
 import * as yup from "yup";
 import { login } from "../../common/Services/apiServices";
 import { useNavigate } from "react-router-dom";
-import NavigationBar from "../../Navigation/NavigationBar";
+import NavigationBar from "../../navigation/NavigationBar";
 import { useDispatch } from "react-redux";
 import { EMPTY } from "../../common/constants";
 import { showNotification } from "../../common/Notification";
