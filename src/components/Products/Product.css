@@ -1,0 +1,75 @@
+.availableItems {
+    font-weight: 500;
+    color: white;
+    padding: 8px;
+}
+
+.availableQuantity {
+    height: 36px;
+    background-color: #3f51b5;
+    margin-left: -12px;
+    border-radius: 20px;
+    padding: 8px;
+    gap: 2 !important;
+}
+
+.price {
+    color: red;
+    display: flex;
+    align-items: center;
+}
+
+.rupeeIcon {
+    color: red;
+    font-size: 2rem !important;
+}
+
+#orderBtn {
+    background-color: #3f51b5;
+    color: white;
+    width: fit-content;
+    font-weight: 600;
+    padding: 12px 20px;
+}
+
+.detailBox {
+    border-radius: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    background-color: #fff;
+}
+
+.dialogContent {
+    display: flex;
+    align-items: center;
+}
+
+.okBtn {
+    background-color: #3f51b5 !important;
+    padding: 6px !important;
+}
+
+.cancelBtn {
+    background-color: transparent;
+    border-color: #3f51b5 !important;
+    color: #3f51b5 !important;
+}
+
+.css-b62m3t-container {
+    width: 100% !important;
+}
+
+.css-1nmdiq5-menu {
+    z-index: 999 !important;
+}
+
+.errorField {
+    border: red !important;
+}
+
+.errorText {
+    color: #d32f2f !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.categoryLabel {
+    color: #d32f2f !important;
+}
