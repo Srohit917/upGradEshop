@@ -1,0 +1,24 @@
+#navigationBtn {
+    text-decoration: underline;
+}
+#navigationBtn:hover {
+    background-color: transparent;
+}
+.appName {
+    flex-grow: 1;
+}
+.logOutBtn {
+    background-color: #F33A6A !important;
+    text-decoration: none;
+    font-weight: 600;
+    color: white;
+}
+.MuiInputBase.root {
+    width: 40ch;
+}
+.searchField {
+    padding: 8px 8px 8px 0px !important;
+}
+.MuiInputBase {
+    padding: 8px 8px 8px 0px !important;
+}
