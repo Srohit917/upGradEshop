@@ -1,5 +1,5 @@
 import { Button, Grid2, Typography } from "@mui/material";
-import NavigationBar from "../../Navigation/NavigationBar";
+import NavigationBar from "../../navigation/NavigationBar";
 import Categories from "../../common/Categories";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";

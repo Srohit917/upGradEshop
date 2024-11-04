@@ -5,8 +5,8 @@ import SignUp from "./components/SignUp/SignUp";
 import AuthenticationComponent from "./AuthenticationComponent";
 import AddProduct from "./components/Products/AddProduct";
 import ProductDetail from "./components/Products/ProductDetails";
-import Dashboard from "./components/Dashboard/Dashboard";
-import OrderPage from "./components/Order/Order";
+import OrderPage from "./components/order/Order";
+import Dashboard from "./components/dashboard/Dashboard";
 
 function App() {
   return (
