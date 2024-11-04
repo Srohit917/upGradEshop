@@ -6,7 +6,7 @@ import Step from "@mui/material/Step";
 import "./Order.css";
 import { useState } from "react";
 import StepButton from "@mui/material/StepButton";
-import Address from "../Address/Address";
+import Address from "../address/Address";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import ConfirmOrder from "./ConfirmOrder";

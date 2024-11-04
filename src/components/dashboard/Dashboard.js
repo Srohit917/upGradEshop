@@ -1,6 +1,6 @@
 import Categories from "../../common/Categories";
 import NavigationBar from "../../navigation/NavigationBar";
-import Products from "../Products/Products";
+import Products from "../products/Products";
 import Sorting from "../../common/Sorting";
 const Dashboard = () => {
 
