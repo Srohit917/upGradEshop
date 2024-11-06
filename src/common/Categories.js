@@ -43,7 +43,7 @@ const Categories = () => {
         aria-label="text alignment"
       >
         {[ALL,...categories].map((category) => (
-          <ToggleButton value={category}>{category}</ToggleButton>
+          <ToggleButton value={category} key={category}>{category}</ToggleButton>
         ))}
       </ToggleButtonGroup>
     </Grid2>
