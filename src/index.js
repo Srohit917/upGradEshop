@@ -11,25 +11,25 @@ import { NotificationProvider } from "./common/Notification";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <SnackbarProvider
-      maxSnack={3}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      classes={{
-        containerRoot: "snackbar-container",
-      }}
-      autoHideDuration={2000}
-    >
-      <NotificationProvider>
-        <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <App />
-            </PersistGate>
-        </Provider>
-      </NotificationProvider>
-    </SnackbarProvider>
+  <SnackbarProvider
+    maxSnack={3}
+    anchorOrigin={{
+      vertical: "top",
+      horizontal: "right",
+    }}
+    classes={{
+      containerRoot: "snackbar-container",
+    }}
+    autoHideDuration={2000}
+  >
+    <NotificationProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
+      </Provider>
+    </NotificationProvider>
+  </SnackbarProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

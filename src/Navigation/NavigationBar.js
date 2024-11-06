@@ -12,24 +12,23 @@ import {
 import { ShoppingCart } from "@mui/icons-material";
 import { navigationStyles, navigationTheme } from "../common/styles";
 import "./NavigationBar.css";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SearchIcon from "@mui/icons-material/Search";
 import _debounce from "lodash.debounce";
 import { EMPTY } from "../common/constants";
+import { navigateTo } from "../common/history";
 
 const NavigationBar = () => {
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state.userDetails);
+  const userDetails = useSelector((state) => state.userDetails);
   const productDetails = useSelector((state) => state.productDetails);
   const { sortBy, filterType, filterProducts } = productDetails;
-  const { isAdmin, isLoggedIn } = selector;
+  const { isAdmin, isLoggedIn } = userDetails;
   const { appBarBoxStyle, toolBarStyle, searchFieldStyle, searchIconStyle } = navigationStyles();
 
   const handleRedirection = (page) => {
-    navigate(`/${page}`);
+    navigateTo(`/${page}`);
   };
 
   const handleOnSearch = useCallback(

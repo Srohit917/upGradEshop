@@ -10,10 +10,10 @@ import { useFormik } from "formik";
 import CopyrightOutlinedIcon from "@mui/icons-material/CopyrightOutlined";
 import * as yup from "yup";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import NavigationBar from "../../navigation/NavigationBar";
 import TextInput from "../../common/TextInput";
-import { productFormTheme } from "../../common/styles";
+import { productFormTheme, productStyles } from "../../common/styles";
 import { addProduct, modifyProduct } from "../../common/Services/apiServices";
 import { useSelector } from "react-redux";
 import CreatableSelect from "react-select/creatable";
@@ -21,13 +21,14 @@ import { useState } from "react";
 import "./Product.css";
 import { showNotification } from "../../common/Notification";
 import { EMPTY } from "../../common/constants";
+import { navigateTo } from "../../common/history";
 
 const AddProduct = () => {
-  const navigate = useNavigate();
   const { state } = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const categoryDetails = useSelector((state) => state.categories);
   const { categories } = categoryDetails;
+  const { shoppingCartIcon, footerStyle } = productStyles();
 
   const createOption = (label) => ({
     label,
@@ -41,7 +42,13 @@ const AddProduct = () => {
 
   const initialValues = {
     name: state?.product?.name || EMPTY,
-    category: state?.product?.category ? options.filter((option) => option.value.toLowerCase() === state?.product?.category.toLowerCase())[0].value : EMPTY || EMPTY,
+    category: state?.product?.category
+      ? options.filter(
+          (option) =>
+            option.value.toLowerCase() ===
+            state?.product?.category.toLowerCase()
+        )[0].value
+      : EMPTY || EMPTY,
     price: state?.product?.price || EMPTY,
     description: state?.product?.description || EMPTY,
     manufacturer: state?.product?.manufacturer || EMPTY,
@@ -80,9 +87,14 @@ const AddProduct = () => {
         ? await modifyProduct(productId, payload)
         : await addProduct(payload);
       if (result) {
-        showNotification(`Product ${formik.values.name} ${ productId ? "modified" : "added"} successfully`, "success"); 
+        showNotification(
+          `Product ${formik.values.name} ${
+            productId ? "modified" : "added"
+          } successfully`,
+          "success"
+        );
         formik.resetForm();
-        navigate('/')
+        navigateTo("/");
       }
     },
   });
@@ -138,15 +150,10 @@ const AddProduct = () => {
           >
             <AddShoppingCartIcon
               fontSize="medium"
-              sx={{
-                borderRadius: "50%",
-                backgroundColor: "#F33A6A",
-                padding: "12px",
-                color: "white",
-              }}
+              className={shoppingCartIcon}
             />
             <Typography variant="h5" marginTop={2}>
-              {`${state?.product?.id ? 'Modify' : 'Add' } Product`}
+              {`${state?.product?.id ? "Modify" : "Add"} Product`}
             </Typography>
           </Grid>
           <Grid
@@ -170,7 +177,7 @@ const AddProduct = () => {
               <FormHelperText
                 variant="h5"
                 fontSize="medium"
-                className={formik.errors.category ? "categoryLabel" : ""}
+                className={formik.errors.category ? "categoryLabel" : EMPTY}
               >
                 Category*
               </FormHelperText>
@@ -181,7 +188,10 @@ const AddProduct = () => {
                 isDisabled={isLoading}
                 isLoading={isLoading}
                 onChange={(option) => {
-                  formik.setFieldValue("category", option ? option.value : "");
+                  formik.setFieldValue(
+                    "category",
+                    option ? option.value : EMPTY
+                  );
                 }}
                 onCreateOption={handleCreate}
                 options={options}
@@ -232,7 +242,7 @@ const AddProduct = () => {
               onChange={formik.handleChange}
             />
             <Button id="signUpBtn" onClick={formik.handleSubmit}>
-              {`${state?.product?.id ? 'Modify' : 'Add' } Product`}
+              {`${state?.product?.id ? "Modify" : "Add"} Product`}
             </Button>
           </Grid>
           <Grid
@@ -241,16 +251,7 @@ const AddProduct = () => {
             display="flex"
             alignItems="flex-start"
           >
-            <Typography
-              variant="body"
-              sx={{
-                color: "lightslategrey",
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                paddingTop: "24px",
-              }}
-            >
+            <Typography variant="body" className={footerStyle}>
               Copyright <CopyrightOutlinedIcon /> <span> upGrad </span> 2024
             </Typography>
           </Grid>

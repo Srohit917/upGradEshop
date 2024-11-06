@@ -3,12 +3,14 @@ import { useState } from "react";
 import "./Common.css";
 import { useDispatch, useSelector } from "react-redux";
 import Dropdown from "./Dropdown";
+import { DEFAULT } from "./constants";
 
 const Sorting = () => {
-  const [sortBy, setSortBy] = useState("default");
+  const [sortBy, setSortBy] = useState(DEFAULT);
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
   const { filterType, searchItem } = productDetails;
+  
   const handleChange = (data) => {
     setSortBy(data.value);
     dispatch({ type: "UPDATE_FILTERED_PRODUCTS", filterType: filterType, sortBy: data.value, searchItem: searchItem });

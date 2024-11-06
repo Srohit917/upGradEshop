@@ -7,15 +7,14 @@ import CopyrightOutlinedIcon from "@mui/icons-material/CopyrightOutlined";
 import "./Login.css";
 import * as yup from "yup";
 import { login } from "../../common/Services/apiServices";
-import { useNavigate } from "react-router-dom";
 import NavigationBar from "../../navigation/NavigationBar";
 import { useDispatch } from "react-redux";
 import { EMPTY } from "../../common/constants";
 import { showNotification } from "../../common/Notification";
+import { navigateTo } from "../../common/history";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { lockIconStyle, textFieldStyle, footerStyle } = loginStyles();
   const formik = useFormik({
     initialValues: { emailAddress: EMPTY, password: EMPTY },
@@ -35,13 +34,11 @@ const Login = () => {
       if (result && result.token) {
         dispatch({
           type: "UPDATE_USER_DETAILS",
-          isLoggedIn: true,
-          roles: result.userRoles,
-          isAdmin: result.userRoles.indexOf("ADMIN") != -1,
+          isLoggedIn: true
         })
         localStorage.setItem("token", result.token);
         showNotification("Logged in successfully!", "success");
-        navigate("/");
+        navigateTo("/");
       }
     },
   });
@@ -116,21 +113,22 @@ const Login = () => {
             <Button id="signInBtn" onClick={formik.handleSubmit}>
               Sign In
             </Button>
-            <Button variant="body" id="signInText" onClick={() => navigate('/signUp')}>
+            <a  href="/signUp" id="signInText">
               Don't have an account? Sign Up
-            </Button>
+            </a>
           </Grid>
           <Grid
             item
             justifyContent="center"
             display="flex"
             alignItems="flex-start"
+            marginTop={6}
           >
             <Typography
               variant="body"
               className={footerStyle}
             >
-              Copyright <CopyrightOutlinedIcon /> <span> upGrad </span> 2024
+              Copyright <CopyrightOutlinedIcon /> <span><a href="https://www.upgrad.com/" target="_blank">upGrad</a> </span> 2024
             </Typography>
           </Grid>
         </Grid>

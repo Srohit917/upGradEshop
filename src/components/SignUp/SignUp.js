@@ -6,14 +6,13 @@ import { useFormik } from "formik";
 import CopyrightOutlinedIcon from "@mui/icons-material/CopyrightOutlined";
 import * as yup from "yup";
 import { signUp } from "../../common/Services/apiServices";
-import { useNavigate } from "react-router-dom";
 import NavigationBar from "../../navigation/NavigationBar";
 import "./SignUp.css";
 import { EMPTY } from "../../common/constants";
 import { showNotification } from "../../common/Notification";
+import { navigateTo } from "../../common/history";
 
 const SignUp = () => {
-  const navigate = useNavigate();
   const { lockIconStyle, textFieldStyle, footerStyle } = loginStyles();
   const formik = useFormik({
     initialValues: {
@@ -56,7 +55,7 @@ const SignUp = () => {
       const result = await signUp(payload);
       if (result && result.message) {
         showNotification(result.message, "success");
-        navigate("/login");
+        navigateTo("/login");
       }
     },
   });
@@ -171,22 +170,22 @@ const SignUp = () => {
             <Button id="signUpBtn" onClick={formik.handleSubmit}>
               Sign Up
             </Button>
-            <Button
-              variant="body"
+            <a
               id="signUpText"
-              onClick={() => navigate("/login")}
+              href="/logIn"
             >
               Already have an account? Sign In
-            </Button>
+            </a>
           </Grid>
           <Grid
             item
             justifyContent="center"
             display="flex"
             alignItems="flex-start"
+            marginTop={6}
           >
             <Typography variant="body" className={footerStyle}>
-              Copyright <CopyrightOutlinedIcon /> <span> upGrad </span> 2024
+              Copyright <CopyrightOutlinedIcon /> <a href="https://www.upgrad.com/" target="_blank"> upGrad </a> 2024
             </Typography>
           </Grid>
         </Grid>

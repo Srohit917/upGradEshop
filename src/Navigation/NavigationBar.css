@@ -1,5 +1,6 @@
 #navigationBtn {
     text-decoration: underline;
+    text-transform: capitalize;
 }
 #navigationBtn:hover {
     background-color: transparent;
@@ -21,4 +22,7 @@
 }
 .MuiInputBase {
     padding: 8px 8px 8px 0px !important;
+}
+.homeBtn {
+    text-transform: initial;
 }

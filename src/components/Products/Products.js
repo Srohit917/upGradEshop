@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { deleteRequest, fetchProducts } from "../../common/Services/apiServices";
+import { deleteProduct, fetchProducts } from "../../common/Services/apiServices";
 import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -11,19 +11,20 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, G
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
-import { useNavigate } from "react-router-dom";
 import './Product.css'
 import { showNotification } from "../../common/Notification";
+import { navigateTo } from "../../common/history";
+import { productStyles } from "../../common/styles";
 
 const Products = () => {
   const productDetails = useSelector((state) => state.productDetails);
   const userDetails = useSelector((state) => state.userDetails);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { filterProducts } = productDetails;
   const { isAdmin } = userDetails;
   const[showDeleteConfirmationDialog, setShowDeleteConfirmationDialog] = useState(false);
   const [product, setProduct] = useState({});
+  const { productCardStyle, productImage, deleteConfirmation, cardContentStyle, productNameStyle, productDescStyle, cardActions, buyBtnStyle } = productStyles();
 
   const getProducts = async () => {
     const response = await fetchProducts();
@@ -35,9 +36,8 @@ const Products = () => {
   }, []);
 
   const handleOnConfirm = async () => {
-    const deleteResponse = await deleteRequest(`http://localhost:8080/api/products/${product.id}`);
-    console.log("deleteResponse.. ", deleteResponse);
-    if(deleteResponse == "deleted") {
+    const deleteResponse = await deleteProduct(product.id);
+    if(deleteResponse) {
       showNotification(`Product ${product.name} deleted successfully`, "success");
       setProduct({});
       setShowDeleteConfirmationDialog(false);
@@ -55,24 +55,16 @@ const Products = () => {
       {filterProducts && filterProducts.length > 0 ? 
         filterProducts.map((product) => (
           <Card
-            sx={{
-              width: 420,
-              height: "auto",
-              display: "flex",
-              flexDirection: "column",
-            }}
+            className={productCardStyle}
             key={product.id}
           >
             <CardMedia
               component="img"
               alt={product.name}
               image={product.imageUrl}
-              sx={{
-                objectFit: "cover",
-                height: 320,
-              }}
+              className={productImage}
             />
-            <CardContent sx={{ flexGrow: 1 }}>
+            <CardContent className={cardContentStyle}>
               <Grid2
                 spacing={2}
                 display="flex"
@@ -83,13 +75,7 @@ const Products = () => {
                   gutterBottom
                   variant="h5"
                   component="div"
-                  sx={{
-                    overflow: "hidden",
-                    display: "-webkit-box",
-                    WebkitLineClamp: "2",
-                    textOverflow: "ellipsis",
-                    WebkitBoxOrient: "vertical",
-                  }}
+                  className={productNameStyle}
                 >
                   {product.name}
                 </Typography>
@@ -105,32 +91,21 @@ const Products = () => {
               </Grid2>
               <Typography
                 variant="body2"
-                sx={{
-                  overflow: "hidden",
-                  display: "-webkit-box",
-                  WebkitLineClamp: "2",
-                  textOverflow: "ellipsis",
-                  WebkitBoxOrient: "vertical",
-                }}
+                className={productDescStyle}
               >
                 {product.description}
               </Typography>
             </CardContent>
             <CardActions
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-              }}
+              className={cardActions}
             >
               <Grid2 justifyContent="flex-end">
                 <Button
                   size="small"
                   variant="contained"
-                  sx={{
-                    backgroundColor: "#3f51b5",
-                  }}
+                  className={buyBtnStyle}
                   onClick={() =>
-                    navigate("/productDetail", {
+                    navigateTo("/productDetail", {
                       state: {
                         id: product.id,
                       },
@@ -149,8 +124,8 @@ const Products = () => {
                   flex={1}
                   gap={1}
                 >
-                  <IconButton aria-label="edit" size="medium" onClick={() => 
-                    navigate("/addProduct", {
+                  <IconButton aria-label="edit" size="medium" onClick={() =>
+                    navigateTo("/addProduct", {
                       state: {
                         product: product,
                       },
@@ -175,7 +150,7 @@ const Products = () => {
         onClose={handleOnCancel}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-        sx={{ '& .MuiDialog-paper': { width: '30%', maxHeight: 460, height: 200 } }}
+        className={deleteConfirmation}
       >
         <DialogTitle id="alert-dialog-title">
           Confirm deletion of product!

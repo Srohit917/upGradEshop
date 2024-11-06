@@ -2,31 +2,34 @@ import { Button, Grid2, Typography } from "@mui/material";
 import NavigationBar from "../../navigation/NavigationBar";
 import Categories from "../../common/Categories";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./Product.css";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { TextField } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductDetails } from "../../common/Services/apiServices";
+import { navigateTo } from "../../common/history";
+import { imgStyle, productStyles } from "../../common/styles";
+import { EMPTY } from "../../common/constants";
 
-const ProductDetail = (props) => {
+const ProductDetail = () => {
   const { state } = useLocation();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
   const { quantity } = productDetails;
   const [productDetail, setProductDetail] = useState();
+  const { quantityField } = productStyles();
 
   const getProductDetails = async () => {
     const response = await fetchProductDetails(state.id);
-    if(response) setProductDetail(response);
+    if (response) setProductDetail(response);
   };
 
   useEffect(() => {
     if (state && state.id) {
       getProductDetails();
     } else {
-      navigate("/");
+      navigateTo("/");
     }
   }, [state]);
 
@@ -35,7 +38,7 @@ const ProductDetail = (props) => {
   };
 
   return (
-    <Grid2 display={"flex"} direction={"column"} flexDirection={"column"}>
+    <Grid2 display="flex" direction="column" flexDirection="column">
       <NavigationBar />
       <Categories />
       {productDetail && Object.keys(productDetail).length > 0 && (
@@ -53,10 +56,7 @@ const ProductDetail = (props) => {
             <img
               src={productDetail.imageUrl}
               alt={productDetail.name}
-              style={{
-                maxHeight: 600,
-                width: 400,
-              }}
+              style={imgStyle}
               loading="lazy"
             />
           </Grid2>
@@ -78,8 +78,8 @@ const ProductDetail = (props) => {
                   className="availableItems"
                 >{`Available Quantity:  ${productDetail.availableItems}`}</Typography>
               </Grid2>
-              </Grid2>
-              <Grid2 gap={3} display="flex" flexDirection="column" marginTop={4}>
+            </Grid2>
+            <Grid2 gap={3} display="flex" flexDirection="column" marginTop={4}>
               <Grid2
                 item
                 display="flex"
@@ -89,7 +89,7 @@ const ProductDetail = (props) => {
                 gap={1}
               >
                 <Typography variant="body">Category: </Typography>
-                <Typography variant="body" fontWeight={600}>
+                <Typography variant="body" fontWeight={600} className="categoryName">
                   {productDetail.category}
                 </Typography>
               </Grid2>
@@ -106,13 +106,10 @@ const ProductDetail = (props) => {
                 variant="outlined"
                 label="Enter Quantity*"
                 value={quantity}
-                error={quantity == ""}
+                error={quantity == EMPTY}
                 onChange={onChange}
-                helperText={quantity == "" ? "Min Quantity is 1" : ""}
-                sx={{
-                  width: "100%",
-                  marginTop: 2,
-                }}
+                helperText={quantity == EMPTY ? "Min Quantity is 1" : EMPTY}
+                className={quantityField}
               ></TextField>
               <Button
                 id="orderBtn"
@@ -121,8 +118,8 @@ const ProductDetail = (props) => {
                     type: "UPDATE_BUYING_PRODUCT",
                     payload: productDetail,
                   });
-                  dispatch({ type: "SELECTED_ADDRESS", payload: {} })
-                  navigate("/orderProduct");
+                  dispatch({ type: "SELECTED_ADDRESS", payload: {} });
+                  navigateTo("/orderProduct");
                 }}
               >
                 Place Order

@@ -73,3 +73,6 @@
 .categoryLabel {
     color: #d32f2f !important;
 }
+.categoryName {
+    text-transform: capitalize;
+}

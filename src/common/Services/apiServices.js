@@ -54,33 +54,20 @@ export const fetchGetRequestWithAuthorization = async (url) => {
     });
 }
 
-export const fetchPutRequestWithAuthorization = async (url) => {
-    return await axios.put(url, {
+export const fetchPutRequestWithAuthorization = async (url, payload) => {
+    return await axios.put(url, payload, {
         headers: createHeaders(true),
     });
 };
 
-export const deleteRequest = async(url) => {
-    const token = localStorage.getItem("token");
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-      }
-      try {
-        const response = await axios.delete(url, {
-            headers: headers
-        });
-        if(response.status == 204) return "deleted";
-        if(response.status === 200 || response.status == 201) return response.data;
-    } catch(error) {
-        if(error.status === 401) return 401;
-        return "error";
-    }
-    return false;
-}
+export const fetchDeleteRequestWithAuthorization = async (url) => {
+    return await axios.delete(url, {
+        headers: createHeaders(true),
+    });
+};
 
 export const fetchProducts = async () => {
-    return await fetchWrapper(fetchGetRequest, url.products);
+    return await fetchWrapper(fetchGetRequest, url.productsUrl);
 };
 
 export const login = async (payload) => {
@@ -96,15 +83,15 @@ export const fetchCategories = async () => {
 }
 
 export const fetchProductDetails = async (productId) => {
-    return await fetchWrapper(fetchGetRequest, `${url.productDetails}/${productId}`);
+    return await fetchWrapper(fetchGetRequest, `${url.productsUrl}/${productId}`);
 }
 
-export const fetchAddresses = async () => {
-    return await fetchWrapper(fetchGetRequestWithAuthorization, url.addresses);
+export const fetchAddresses = async (userId) => {
+    return await fetchWrapper(fetchGetRequestWithAuthorization, `${url.addressesUrl}/${userId}`);
 }
 
 export const addAddress = async (payload) => {
-    return await fetchWrapper(fetchPostRequestWithAuthorization, url.addAddress, payload);
+    return await fetchWrapper(fetchPostRequestWithAuthorization, url.addressesUrl, payload);
 }
 
 export const placeOrder = async (payload) => {
@@ -112,9 +99,21 @@ export const placeOrder = async (payload) => {
 }
 
 export const addProduct = async (payload) => {
-    return await fetchWrapper(fetchPostRequestWithAuthorization, url.addProduct, payload);
+    return await fetchWrapper(fetchPostRequestWithAuthorization, url.productsUrl, payload);
 }
 
-export const modifyProduct = async (productId) => {
-    return await fetchWrapper(fetchPutRequestWithAuthorization, `${url.addProduct}/${productId}`);
+export const modifyProduct = async (productId, modifyProduct) => {
+    return await fetchWrapper(fetchPutRequestWithAuthorization, `${url.productsUrl}/${productId}`, modifyProduct);
+}
+
+export const deleteProduct = async (productId) => {
+    return await fetchWrapper(fetchDeleteRequestWithAuthorization, `${url.productsUrl}/${productId}`);
+}
+
+export const fetchUserDetails = async (userId) => {
+    return await fetchWrapper(fetchGetRequest, `${url.users}/${userId}`);
+}
+
+export const fetchUsers =  async() => {
+    return await fetchWrapper(fetchGetRequest, url.users);
 }

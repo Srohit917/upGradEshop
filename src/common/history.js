@@ -3,17 +3,16 @@ import { useNavigate } from 'react-router-dom';
 
 let navigateTo;
 
-const Navigation = ({ children }) => {
-    const naviagte = useNavigate();
+const NavigationProvider = ({ children }) => {
+    const navigate = useNavigate();
 
     useEffect(() => {
-        // Set up a global showNotification function
-        navigateTo = (path) => {
-            naviagte(path);
+        navigateTo = (path, state) => {
+          navigate(path, state);
         };
-    }, [navigateTo]);
+    }, [navigate]);
 
     return <>{children}</>;
 };
 
-export { Navigation, navigateTo };
+export { NavigationProvider, navigateTo };

@@ -1,7 +1,9 @@
 import { TextField } from "@mui/material";
+import { loginStyles } from "./styles";
 
 const TextInput = (props) => {
   const { name, label, onChange, error, value } = props;
+  const { textFieldStyle } = loginStyles();
   return (
     <TextField
       name={name}
@@ -11,9 +13,7 @@ const TextInput = (props) => {
       value={value}
       onChange={onChange}
       helperText={error}
-      sx={{
-        width: "100%",
-      }}
+      className={textFieldStyle}
     ></TextField>
   );
 };

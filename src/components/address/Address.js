@@ -16,11 +16,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { jwtDecode } from "jwt-decode";
 import { showNotification } from "../../common/Notification";
 import { EMPTY } from "../../common/constants";
+import { addressStyles } from "../../common/styles";
 
 const Address = () => {
   const dispatch = useDispatch();
   const addressState = useSelector((state) => state.addresses);
   const { addresses, selectedAddress } = addressState;
+  const { labelStyle } = addressStyles();
+  const { userId } = jwtDecode(localStorage.getItem("token"));
+
   const formik = useFormik({
     initialValues: {
       name: EMPTY,
@@ -40,7 +44,6 @@ const Address = () => {
       zipCode: yup.number().required("Zip Code is required."),
     }),
     onSubmit: async (values) => {
-      const { userId } = jwtDecode(localStorage.getItem("token"));
       const payload = {
         id: EMPTY,
         name: values.name,
@@ -62,7 +65,7 @@ const Address = () => {
   });
 
   const getAddresses = async () => {
-    const response = await fetchAddresses();
+    const response = await fetchAddresses(userId);
     if (response && response.length > 0)
       dispatch({ type: "ADDRESS_DETAILS", payload: response });
   };
@@ -96,7 +99,6 @@ const Address = () => {
       justifyContent="center"
       justifyItems="center"
       flexGrow={1}
-      paddingTop="24px"
       paddingBottom="24px"
       alignItems="center"
     >
@@ -105,19 +107,11 @@ const Address = () => {
         width="40%"
         display="flex"
         justifyContent="flex-start"
-        marginTop={4}
+        marginBottom={4}
         flexDirection="column"
         alignItems="flex-start"
       >
-        <FormHelperText
-          sx={{
-            width: "40%",
-            fontSize: "medium",
-            color: "black",
-          }}
-        >
-          Select Address
-        </FormHelperText>
+        <FormHelperText className={labelStyle}>Select Address</FormHelperText>
         {addressesOptions && (
           <Dropdown
             options={addressesOptions}
