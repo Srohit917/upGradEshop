@@ -143,7 +143,7 @@ export const orderStyles = makeStyles({
   stepperLabelStyle: { pointerEvents: "none" },
   cardStyle: {
     display: "flex",
-    margin: "4% 12% 2% 12%"
+    margin: "2% 12% 2% 12%"
   },
   productDetailContainer: { display: "flex", flexDirection: "column", flex: 1 },
   cardContentStyle: {
@@ -186,6 +186,7 @@ export const productStyles = makeStyles({
     height: "auto",
     display: "flex",
     flexDirection: "column",
+    height: 560
   },
   productImage: {
     objectFit: "cover",
@@ -194,7 +195,7 @@ export const productStyles = makeStyles({
   deleteConfirmation: {
     "& .MuiDialog-paper": { width: "30%", maxHeight: 460, height: 200 },
   },
-  cardContentStyle: { flexGrow: 1 },
+  cardContentStyle: { flexGrow: 1, overflow: "scroll" },
   productNameStyle: {
     overflow: "hidden",
     display: "-webkit-box",
@@ -203,11 +204,6 @@ export const productStyles = makeStyles({
     WebkitBoxOrient: "vertical",
   },
   productDescStyle: {
-    overflow: "hidden",
-    display: "-webkit-box",
-    WebkitLineClamp: "2",
-    textOverflow: "ellipsis",
-    WebkitBoxOrient: "vertical",
     fontStyle: "italic"
   },
   cardActions: {

@@ -57,6 +57,14 @@ const NavigationBar = () => {
     });
   }, []);
 
+  const handleLogOut = () => {
+    localStorage.clear();
+    dispatch({ type: "RESET_USER_DETAILS" });
+    dispatch({ type: "RESET_CATEGORY_DETAILS" });
+    dispatch({ type: "RESET_PRODUCT_DETAILS" });
+    dispatch({ type: "RESET_ADDRESS" })
+  }
+
   return (
     <MuiThemeProvider theme={navigationTheme}>
       <Box className={appBarBoxStyle}>
@@ -127,14 +135,7 @@ const NavigationBar = () => {
                 <Button
                   variant="contained"
                   className="logOutBtn"
-                  onClick={() => {
-                    dispatch({
-                      type: "RESET_USER_DETAILS",
-                    });
-                    dispatch({
-                      type: "RESET_PRODUCT_DETAILS",
-                    });
-                  }}
+                  onClick={handleLogOut}
                 >
                   LogOut
                 </Button>

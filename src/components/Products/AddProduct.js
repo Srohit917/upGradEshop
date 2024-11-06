@@ -73,6 +73,7 @@ const AddProduct = () => {
     }),
     onSubmit: async (values) => {
       const productId = state?.product?.id;
+      const currentDateTime = new Date().toISOString();
       const payload = {
         id: productId || EMPTY,
         name: values.name,
@@ -82,6 +83,8 @@ const AddProduct = () => {
         manufacturer: values.manufacturer,
         availableItems: values.availableItems,
         imageUrl: values.imageUrl,
+        lastUpdated: currentDateTime,
+        dateCreated: values.dateCreated ?? currentDateTime
       };
       const result = productId
         ? await modifyProduct(productId, payload)

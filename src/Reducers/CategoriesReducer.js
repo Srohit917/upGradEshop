@@ -9,7 +9,7 @@ const initialState = {
           categories: action.categories
         };
       case "RESET_CATEGORY_DETAILS":
-        return { ...initState, categories: [] };
+        return { ...initialState };
       default:
         return initState;
     }

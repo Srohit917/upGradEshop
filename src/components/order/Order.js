@@ -14,6 +14,7 @@ import { jwtDecode } from "jwt-decode";
 import { showNotification } from "../../common/Notification";
 import { navigateTo } from "../../common/history";
 import { orderStyles } from "../../common/styles";
+import ProductInfo from "../products/ProductInfo";
 
 const OrderPage = () => {
   const steps = ["Items", "Select Address", "Confirm Order"];
@@ -27,13 +28,9 @@ const OrderPage = () => {
   const { stepperContainer, backButton, stepperLabelStyle } = orderStyles();
 
   const handleBack = () => {
-    if (activeStep === 1) {
+    if (activeStep === 0) {
       dispatch({ type: "UPDATE_QUANTITY", quantity: 1 });
-      navigateTo("/productDetail", {
-        state: {
-          id: selectedProduct.id,
-        },
-      });
+      navigateTo("/");
     }
     setCompleted((prevState) => ({
       ...prevState,
@@ -58,7 +55,7 @@ const OrderPage = () => {
         showNotification("Order placed successfully!!!", "success");
         navigateTo("/");
       }
-    } else {
+    } else if(activeStep == 1) {
       if (selectedAddress && Object.keys(selectedAddress).length > 0) {
         setCompleted((prevState) => ({
           ...prevState,
@@ -68,14 +65,19 @@ const OrderPage = () => {
       } else {
         showNotification("Please Select Address", "error");
       }
+    } else {
+      setCompleted((prevState) => ({
+        ...prevState,
+        [activeStep]: true,
+      }));
+      setActiveStep(activeStep + 1);
     }
   };
 
   return (
     <Grid2>
       <NavigationBar />
-      <Box className={stepperContainer}>
-        <Card sx={{ padding: 4}}>
+        <Box className={stepperContainer}>
           <Stepper nonLinear activeStep={activeStep}>
             {steps.map((label, index) => (
               <Step key={label} completed={completed[index]}>
@@ -85,13 +87,12 @@ const OrderPage = () => {
               </Step>
             ))}
           </Stepper>
-        </Card>
       </Box>
-      {activeStep == 1 ? <Address /> : <ConfirmOrder />}
+      {activeStep == 1 ? <Address /> : activeStep == 2 ? <ConfirmOrder /> : <ProductInfo id={selectedProduct?.id} />}
       <Box className={backButton}>
         <Button
           color="inherit"
-          disabled={activeStep === 0}
+          // disabled={activeStep === 0}
           onClick={handleBack}
         >
           Back

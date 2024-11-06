@@ -42,8 +42,8 @@ const SignUp = () => {
     }),
     onSubmit: async (values) => {
       const roles = values.emailAddress.includes("upgrad.com")
-        ? ["admin", "customer"]
-        : ["customer"];
+        ? ["admin", "user"]
+        : ["user"];
       const payload = {
         email: values.emailAddress,
         role: roles,

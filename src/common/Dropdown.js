@@ -21,7 +21,6 @@ const Dropdown = (props) => {
       value={options.filter(option => JSON.stringify(option.value) === JSON.stringify(value))[0]}
       getOptionLabel={(option) => option.label}
       getOptionValue={(option) => option.value}
-      isClearable
     />
   );
 };
