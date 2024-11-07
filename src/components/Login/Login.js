@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { EMPTY } from "../../common/constants";
 import { showNotification } from "../../common/Notification";
 import { navigateTo } from "../../common/history";
+import Loader from "../../common/Loader";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -31,12 +32,14 @@ const Login = () => {
         password: values.password,
       };
       const result = await login(payload);
-      if (result && result.token) {
+      if (result && result.id) {
         dispatch({
           type: "UPDATE_USER_DETAILS",
           isLoggedIn: true
         })
-        localStorage.setItem("token", result.token);
+        dispatch({ type: "UPDATE_USER_ROLES", payload: result.roles });
+        localStorage.setItem("token", result?.token);
+        localStorage.setItem("userId", result.id);
         showNotification("Logged in successfully!", "success");
         navigateTo("/");
       }
@@ -133,6 +136,7 @@ const Login = () => {
           </Grid>
         </Grid>
       </Grid>
+      <Loader />
     </MuiThemeProvider>
   );
 };

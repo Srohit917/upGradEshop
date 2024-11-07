@@ -17,7 +17,12 @@ export const ProductReducer = (initState = initialState, action) => {
         filterProducts: action.products,
       };
     case "RESET_PRODUCT_DETAILS":
-      return { ...initState };
+      return {
+        ...initState,
+        products: [],
+        filterProducts: [],
+        selectedProduct: {},
+      };
     case "UPDATE_QUANTITY":
       return {
         ...initState,

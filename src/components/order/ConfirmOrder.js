@@ -7,6 +7,7 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { useSelector } from "react-redux";
 import { orderStyles } from "../../common/styles";
 import './Order.css';
+import Loader from "../../common/Loader";
 
 const ConfirmOrder = () => {
   const productState = useSelector((state) => state.productDetails);
@@ -89,6 +90,7 @@ const ConfirmOrder = () => {
           </CardContent>
         </Box>
       </Card>
+      <Loader />
     </Grid2>
   );
 };

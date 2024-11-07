@@ -3,17 +3,17 @@ import NavigationBar from "../../navigation/NavigationBar";
 import Products from "../products/Products";
 import Sorting from "../../common/Sorting";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { jwtDecode } from "jwt-decode";
-import { fetchUserDetails } from "../../common/Services/apiServices";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../../common/Loader";
+
 const Dashboard = () => {
 
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
+  const userDetails = useSelector((state) => state.userDetails);
+  const { roles } = userDetails;
 
   const getUserDetails = async () => {
-    const { userId } = jwtDecode(token);
-    const { roles } = await fetchUserDetails(userId);
     if (roles && roles.length > 0)
       dispatch({ type: "UPDATE_USER_ROLES", payload: roles });
   };
@@ -30,6 +30,7 @@ const Dashboard = () => {
       <Categories />
       <Sorting />
       <Products />
+      <Loader />
     </>
   );
 };

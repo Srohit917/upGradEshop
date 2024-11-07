@@ -10,16 +10,19 @@ const createHeaders = (includeAuth = false) => {
     };
     if (includeAuth) {
         const token = localStorage.getItem("token");
-        headers['Authorization'] = `Bearer ${token}`;
+        headers["x-auth-token"] = token;
     }
     return headers;
 };
 
 const fetchWrapper = async (reqFn, url, payload, isLogin) => {
+    store.dispatch({type: "IS_LOADING", payload: true});
     try {
         const response = await reqFn(url, payload);
+        store.dispatch({type: "IS_LOADING", payload: false});
         return response.data || response;
     } catch (e) {
+        store.dispatch({type: "IS_LOADING", payload: false});
         const status = e.response ? e.response.status : 500;
         if (status === 401) {
             showNotification(isLogin ? "Invalid Credentials. Please try again." : "Session expired!!!", "error");
@@ -86,8 +89,8 @@ export const fetchProductDetails = async (productId) => {
     return await fetchWrapper(fetchGetRequest, `${url.productsUrl}/${productId}`);
 }
 
-export const fetchAddresses = async (userId) => {
-    return await fetchWrapper(fetchGetRequestWithAuthorization, `${url.addressesUrl}/${userId}`);
+export const fetchAddresses = async () => {
+    return await fetchWrapper(fetchGetRequestWithAuthorization, `${url.addressesUrl}`);
 }
 
 export const addAddress = async (payload) => {

@@ -36,12 +36,12 @@ const Products = () => {
   }, []);
 
   const handleOnConfirm = async () => {
+    setShowDeleteConfirmationDialog(false);
     const deleteResponse = await deleteProduct(product.id);
     if(deleteResponse) {
-      showNotification(`Product ${product.name} deleted successfully`, "success");
       setProduct({});
-      setShowDeleteConfirmationDialog(false);
       getProducts();
+      showNotification(`Product ${product.name} deleted successfully`, "success");
     }
   }
 

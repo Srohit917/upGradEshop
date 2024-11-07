@@ -22,6 +22,7 @@ import "./Product.css";
 import { showNotification } from "../../common/Notification";
 import { EMPTY } from "../../common/constants";
 import { navigateTo } from "../../common/history";
+import Loader from "../../common/Loader";
 
 const AddProduct = () => {
   const { state } = useLocation();
@@ -260,6 +261,7 @@ const AddProduct = () => {
           </Grid>
         </Grid>
       </Grid>
+      <Loader />
     </MuiThemeProvider>
   );
 };

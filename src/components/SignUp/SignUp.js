@@ -11,6 +11,7 @@ import "./SignUp.css";
 import { EMPTY } from "../../common/constants";
 import { showNotification } from "../../common/Notification";
 import { navigateTo } from "../../common/history";
+import Loader from "../../common/Loader";
 
 const SignUp = () => {
   const { lockIconStyle, textFieldStyle, footerStyle } = loginStyles();
@@ -190,6 +191,7 @@ const SignUp = () => {
           </Grid>
         </Grid>
       </Grid>
+      <Loader />
     </MuiThemeProvider>
   );
 };

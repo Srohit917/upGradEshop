@@ -24,7 +24,7 @@ const NavigationBar = () => {
   const userDetails = useSelector((state) => state.userDetails);
   const productDetails = useSelector((state) => state.productDetails);
   const { sortBy, filterType, filterProducts } = productDetails;
-  const { isAdmin, isLoggedIn } = userDetails;
+  const { isAdmin, isLoggedIn, roles } = userDetails;
   const { appBarBoxStyle, toolBarStyle, searchFieldStyle, searchIconStyle } = navigationStyles();
 
   const handleRedirection = (page) => {

@@ -13,17 +13,17 @@ import * as yup from "yup";
 import "./Address.css";
 import Dropdown from "../../common/Dropdown";
 import { useDispatch, useSelector } from "react-redux";
-import { jwtDecode } from "jwt-decode";
 import { showNotification } from "../../common/Notification";
 import { EMPTY } from "../../common/constants";
 import { addressStyles } from "../../common/styles";
+import Loader from "../../common/Loader";
 
 const Address = () => {
   const dispatch = useDispatch();
   const addressState = useSelector((state) => state.addresses);
   const { addresses, selectedAddress } = addressState;
   const { labelStyle } = addressStyles();
-  const { userId } = jwtDecode(localStorage.getItem("token"));
+  const { userId } = localStorage.getItem("userId");
 
   const formik = useFormik({
     initialValues: {
@@ -65,7 +65,7 @@ const Address = () => {
   });
 
   const getAddresses = async () => {
-    const response = await fetchAddresses(userId);
+    const response = await fetchAddresses();
     if (response && response.length > 0)
       dispatch({ type: "ADDRESS_DETAILS", payload: response });
   };
@@ -203,6 +203,7 @@ const Address = () => {
           Copyright <CopyrightOutlinedIcon /> <span> upGrad </span> 2024
         </Typography>
       </Grid> */}
+      <Loader />
     </Grid>
   );
 };

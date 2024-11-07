@@ -1,8 +1,5 @@
 import { Button, Grid2, Typography } from "@mui/material";
-import NavigationBar from "../../navigation/NavigationBar";
-import Categories from "../../common/Categories";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import "./Product.css";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import { TextField } from "@mui/material";
@@ -11,6 +8,7 @@ import { fetchProductDetails } from "../../common/Services/apiServices";
 import { navigateTo } from "../../common/history";
 import { imgStyle, productStyles } from "../../common/styles";
 import { EMPTY } from "../../common/constants";
+import Loader from "../../common/Loader";
 
 const ProductInfo = (props) => {
   const dispatch = useDispatch();
@@ -21,7 +19,9 @@ const ProductInfo = (props) => {
 
   const getProductDetails = async () => {
     const response = await fetchProductDetails(props.id);
-    if (response) setProductDetail(response);
+    if (response){
+      setProductDetail(response);
+    }
   };
 
   useEffect(() => {
@@ -125,6 +125,7 @@ const ProductInfo = (props) => {
           </Grid2>
         </Grid2>
       )}
+      <Loader />
     </Grid2>
   );
 };

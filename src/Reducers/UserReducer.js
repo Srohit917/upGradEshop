@@ -2,6 +2,7 @@ const initialState = {
   roles: [],
   isAdmin: false,
   isLoggedIn: false,
+  isLoading: false
 };
 
 export const UserReducer = (initState = initialState, action) => {
@@ -17,7 +18,12 @@ export const UserReducer = (initState = initialState, action) => {
       return {
         ...initState,
         roles: action.payload,
-        isAdmin: action.payload.map((role) => role.name).indexOf("ADMIN") != -1,
+        isAdmin: action.payload.some((role) => role === "ADMIN")
+      };
+    case "IS_LOADING":
+      return {
+        ...initState,
+        isLoading: action.payload
       };
     default:
       return initState;

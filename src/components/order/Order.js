@@ -1,4 +1,4 @@
-import { Button, Card, Grid2 } from "@mui/material";
+import { Button, Grid2 } from "@mui/material";
 import NavigationBar from "../../navigation/NavigationBar";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
@@ -10,7 +10,6 @@ import Address from "../address/Address";
 import { useDispatch, useSelector } from "react-redux";
 import ConfirmOrder from "./ConfirmOrder";
 import { placeOrder } from "../../common/Services/apiServices";
-import { jwtDecode } from "jwt-decode";
 import { showNotification } from "../../common/Notification";
 import { navigateTo } from "../../common/history";
 import { orderStyles } from "../../common/styles";
@@ -42,7 +41,7 @@ const OrderPage = () => {
 
   const handleNext = async () => {
     if (activeStep == 2) {
-      const { userId } = jwtDecode(localStorage.getItem("token"));
+      const { userId } = localStorage.getItem("userId");
       const payload = {
         id: "",
         quantity: quantity,
