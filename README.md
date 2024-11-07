@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+# Ecommerce web application using React
+
+This project has been deployed to github pages. Access the website using below mentioned link
+
+Website link: https://sreelekha2408.github.io/Upgrad-E-Shop/
+
+Clone from main branch, if you decide to run the application in local
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
