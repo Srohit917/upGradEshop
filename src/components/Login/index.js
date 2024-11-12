@@ -7,7 +7,7 @@ import CopyrightOutlinedIcon from "@mui/icons-material/CopyrightOutlined";
 import "./Login.css";
 import * as yup from "yup";
 import { login } from "../../common/Services/apiServices";
-import NavigationBar from "../../navigation/NavigationBar";
+import NavigationBar from "../../Navigation";
 import { useDispatch } from "react-redux";
 import { EMPTY } from "../../common/constants";
 import { showNotification } from "../../common/Notification";

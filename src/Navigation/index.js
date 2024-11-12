@@ -4,11 +4,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import {
-  InputAdornment,
-  ThemeProvider as MuiThemeProvider,
-  TextField,
-} from "@mui/material";
+import {InputAdornment, ThemeProvider as MuiThemeProvider, TextField} from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 import { navigationStyles, navigationTheme } from "../common/styles";
 import "./NavigationBar.css";

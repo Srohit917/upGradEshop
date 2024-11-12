@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import NavigationBar from "../../navigation/NavigationBar";
+import NavigationBar from "../../Navigation/index";
 import Categories from "../../common/Categories";
 import { useLocation } from "react-router-dom";
 import ProductInfo from "./ProductInfo";

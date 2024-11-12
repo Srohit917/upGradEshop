@@ -1,6 +1,6 @@
 import Categories from "../../common/Categories";
-import NavigationBar from "../../navigation/NavigationBar";
-import Products from "../products/Products";
+import NavigationBar from "../../Navigation/index";
+import Products from "../Products/Products";
 import Sorting from "../../common/Sorting";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

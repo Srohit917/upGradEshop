@@ -1,12 +1,12 @@
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Login from "./components/login/Login";
-import SignUp from "./components/signup/SignUp";
+import Login from "./components/Login";
+import SignUp from "./components//SignUp";
 import AuthenticationComponent from "./AuthenticationComponent";
-import AddProduct from "./components/products/AddProduct";
-import ProductDetail from "./components/products/ProductDetails";
+import AddProduct from "./components/Products/AddProduct";
+import ProductDetail from "./components/Products/ProductDetails";
 import OrderPage from "./components/order/Order";
-import Dashboard from "./components/dashboard/Dashboard";
+import Dashboard from "./components/dashboard";
 import { NavigationProvider } from "./common/history";
 
 function App() {

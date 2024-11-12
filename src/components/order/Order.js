@@ -1,5 +1,5 @@
 import { Button, Grid2 } from "@mui/material";
-import NavigationBar from "../../navigation/NavigationBar";
+import NavigationBar from "../../Navigation/index";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
@@ -13,7 +13,7 @@ import { placeOrder } from "../../common/Services/apiServices";
 import { showNotification } from "../../common/Notification";
 import { navigateTo } from "../../common/history";
 import { orderStyles } from "../../common/styles";
-import ProductInfo from "../products/ProductInfo";
+import ProductInfo from "../Products/ProductInfo";
 
 const OrderPage = () => {
   const steps = ["Items", "Select Address", "Confirm Order"];

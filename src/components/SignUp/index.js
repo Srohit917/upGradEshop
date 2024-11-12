@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import CopyrightOutlinedIcon from "@mui/icons-material/CopyrightOutlined";
 import * as yup from "yup";
 import { signUp } from "../../common/Services/apiServices";
-import NavigationBar from "../../navigation/NavigationBar";
+import NavigationBar from "../../Navigation";
 import "./SignUp.css";
 import { EMPTY } from "../../common/constants";
 import { showNotification } from "../../common/Notification";

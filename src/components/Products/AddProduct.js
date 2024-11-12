@@ -11,7 +11,7 @@ import CopyrightOutlinedIcon from "@mui/icons-material/CopyrightOutlined";
 import * as yup from "yup";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import NavigationBar from "../../navigation/NavigationBar";
+import NavigationBar from "../../Navigation/index";
 import TextInput from "../../common/TextInput";
 import { productFormTheme, productStyles } from "../../common/styles";
 import { addProduct, modifyProduct } from "../../common/Services/apiServices";
